@@ -37,7 +37,7 @@ namespace Cambridge.Demo.Client.Terminal
 			apiClient.BaseAddress = new Uri("https://localhost:61849/");
 			//Use IdentityModel Extension to set the AccessToken in the header of the HTTP request
 			apiClient.SetBearerToken(tokenResponse.AccessToken);
-			
+
 			Console.WriteLine(await apiClient.GetStringAsync("Document/Client"));
 		}
     }

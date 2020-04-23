@@ -7,7 +7,6 @@ namespace Cambridge.Demo.ResourceServer.Controllers
 {
 	//The Authorize Attribute will require to have a valid Access Token without additional policy
 	[Authorize]
-	[Route("[controller]/[action]/{name}")]
 	public class DocumentController : ControllerBase
     {
 	    readonly IAuthorizationService _authorizationService;
@@ -26,7 +25,9 @@ namespace Cambridge.Demo.ResourceServer.Controllers
 	    }
 
 		[HttpGet]
-	    public async Task<IActionResult> GetFree(string name)
+		[Route("[controller]/[action]/{name}")]
+
+		public async Task<IActionResult> GetFree(string name)
 	    {
 		    var auth = await _authorizationService.AuthorizeAsync(User, "ScopedPolicy");
 		    if (auth.Succeeded)
@@ -41,6 +42,8 @@ namespace Cambridge.Demo.ResourceServer.Controllers
 		}
 
 		[HttpGet]
+		[Route("[controller]/[action]/{name}")]
+
 		public async Task<IActionResult> GetPersonal(string name)
 	    {
 		    var result = DocumentRepository.PersonalDocuments.SingleOrDefault(x => x.Name.Equals(name));
